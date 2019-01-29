@@ -1,8 +1,8 @@
 {
     "name": "EmonTH",
-    "category": "OpenEnergyMonitor",
-    "group": "Temperature & Humidity",
-    "description": "Automatic inputs and feeds creation for emonTH device.",
+    "category": "Sensor",
+    "group": "OpenEnergyMonitor",
+    "description": "EmonTH temperature & humidity configuration.",
     "inputs": [
         {
             "name": "temperature",

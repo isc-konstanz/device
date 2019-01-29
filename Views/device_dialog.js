@@ -41,11 +41,11 @@ var device_dialog =
             }
             devicesByCategory[device.category].push(device);
         }
-        // Place OpenEnergyMonitor prominently at first place, while sorting other categories
-        if (categories.indexOf('OpenEnergyMonitor') > -1) {
-            categories.splice(categories.indexOf('OpenEnergyMonitor'), 1);
-            categories.sort()
-            categories = ['OpenEnergyMonitor'].concat(categories);
+        categories.sort();
+        
+        if (categories.indexOf('General') > -1) {
+            categories.splice(categories.indexOf('General'), 1);
+            categories = ['General'].concat(categories);
         }
         
         for (var i in categories) {
@@ -63,6 +63,12 @@ var device_dialog =
                 devicesByGroup[group].push(devicesByCategory[category][i]);
             }
             groups.sort();
+
+            // Place OpenEnergyMonitor prominently at first place, while sorting other categories
+            if (groups.indexOf('OpenEnergyMonitor') > -1) {
+            	groups.splice(groups.indexOf('OpenEnergyMonitor'), 1);
+            	groups = ['OpenEnergyMonitor'].concat(groups);
+            }
             
             $('#template-list').append(
                 "<div class='accordion-group'>" +
@@ -101,9 +107,9 @@ var device_dialog =
                 for (var i in devicesByGroup[group]) {
                     var id = devicesByGroup[group][i].id;
                     var name = devicesByGroup[group][i].name;
-                    if (name.length > 25) {
-                        name = name.substr(0, 25) + "...";
-                    }
+//                    if (name.length > 25) {
+//                        name = name.substr(0, 25) + "...";
+//                    }
                     
                     body.append(
                         "<div id='template-"+categoryid+"-"+groupid+"-"+id.replace('/', '-')+"'" +

@@ -1,8 +1,8 @@
 {
-    "name": "Solar PV Type 1",
-    "category": "OpenEnergyMonitor",
-    "group": "EmonPi",
-    "description": "EmonPi Solar PV Type 1 template",
+    "name": "Solar PV Type 1 (EmonPi)",
+    "category": "Meter",
+    "group": "OpenEnergyMonitor",
+    "description": "EmonPi Solar PV Type 1 configuration",
     "inputs": [
         {
             "name": "power1",
@@ -10,15 +10,15 @@
             "processList": [
                 {
                     "process": "log_to_feed",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use"}
                 },
                 {
                     "process": "power_to_kwh",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use_kwh" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use_kwh"}
                 },
                 {
                     "process": "subtract_input",
-                    "arguments": {"type": "ProcessArg::INPUTID", "value": "power2" }
+                    "arguments": {"type": "ProcessArg::INPUTID", "value": "power2"}
                 },
                 {
                     "process": "allowpositive",
@@ -26,11 +26,11 @@
                 },
                 {
                     "process": "log_to_feed",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "import" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "import"}
                 },
                 {
                     "process": "power_to_kwh",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "import_kwh" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "import_kwh"}
                 }
             ]
         },
@@ -40,11 +40,11 @@
             "processList": [
                 {
                     "process": "log_to_feed",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "solar" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "solar"}
                 },
                 {
                     "process": "power_to_kwh",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "solar_kwh" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "solar_kwh"}
                 }
             ]
         }

@@ -136,6 +136,17 @@ function draw(result) {
     $("#thing-actions").show();
     $("#thing-none").hide();
     
+    result.sort(function(r1, r2) {
+        if (typeof r1.name !== 'undefined' && r1.name.toLowerCase().includes('general'))
+            return -1;
+        if (typeof r2.name !== 'undefined' && r2.name.toLowerCase().includes('general'))
+            return 1;
+        if (r1.nodeid < r2.nodeid)
+        	return -1;
+        if (r2.nodeid > r1.nodeid)
+            return 1;
+        return 0;
+    });
     for (var i in result) {
         drawThing(result[i]);
     }
@@ -158,7 +169,7 @@ function drawThing(thing) {
         description = thing.description;
     }
     else description = "";
-
+    
     var header = "";
     var list = "";
     for (var i in thing.items) {

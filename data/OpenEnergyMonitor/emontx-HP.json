@@ -1,8 +1,8 @@
 {
-    "name": "Heatpump Monitor",
-    "category": "OpenEnergyMonitor",
-    "group": "EmonTx",
-    "description": "Heatpump Monitor firmware for EmonTx v3",
+    "name": "Monitor (EmonTx)",
+    "category": "Heat pump",
+    "group": "OpenEnergyMonitor",
+    "description": "EmonTx v3 heat pump monitoring configuration",
     "inputs": [
         {
             "name": "P1",
@@ -10,11 +10,11 @@
             "processList": [
                 {
                     "process": "log_to_feed",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use"}
                 },
                 {
                     "process": "power_to_kwh",
-                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use_kwh" }
+                    "arguments": {"type": "ProcessArg::FEEDID", "value": "use_kwh"}
                 }
             ]
         }
