@@ -650,7 +650,7 @@ var device_dialog =
             }
         });
 
-        $('#device-config-options-table').on('click', '.option-remove', function() {
+        $('#device-config-options-table').on('click', '.option-remove', function(e) {
             e.stopPropagation();
             
             var id = $(this).closest('tr').data('id');
