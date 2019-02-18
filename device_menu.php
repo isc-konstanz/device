@@ -17,9 +17,9 @@
     }
 
     $menu_dropdown[] = array(
-            'name'=> dgettext($domain, "Things"),
-            'icon'=>'icon-tasks',
-            'path'=>"device/thing/view" ,
-            'session'=>"write",
-            'order' => 10
+        'name'=> dgettext($domain, "Things"),
+        'icon'=>'icon-tasks',
+        'path'=>"device/thing/view" ,
+        'session'=>"write",
+        'order' => 10
     );
