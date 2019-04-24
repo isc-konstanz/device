@@ -142,7 +142,7 @@ function draw(result) {
         if (typeof r2.name !== 'undefined' && r2.name.toLowerCase().includes('general'))
             return 1;
         if (r1.nodeid < r2.nodeid)
-        	return -1;
+            return -1;
         if (r2.nodeid > r1.nodeid)
             return 1;
         return 0;

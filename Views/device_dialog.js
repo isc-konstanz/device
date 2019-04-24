@@ -66,8 +66,8 @@ var device_dialog =
 
             // Place OpenEnergyMonitor prominently at first place, while sorting other categories
             if (groups.indexOf('OpenEnergyMonitor') > -1) {
-            	groups.splice(groups.indexOf('OpenEnergyMonitor'), 1);
-            	groups = ['OpenEnergyMonitor'].concat(groups);
+                groups.splice(groups.indexOf('OpenEnergyMonitor'), 1);
+                groups = ['OpenEnergyMonitor'].concat(groups);
             }
             
             $('#template-list').append(
