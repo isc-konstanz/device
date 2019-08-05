@@ -1,5 +1,4 @@
 <?php
-    global $user, $session;
 
     $menu['setup'][] = array(
         'text' => _("Devices"),
