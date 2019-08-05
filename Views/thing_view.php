@@ -9,7 +9,7 @@
 <div class="view-container">
     <div id="thing-header" class="hide">
         <span id="api-help" style="float:right"><a href="api"><?php echo _('Things API Help'); ?></a></span>
-        <h2><?php echo _('Device things'); ?></h2>
+        <h3><?php echo _('Device things'); ?></h3>
     </div>
     <div id="thing-none" class="alert alert-block hide" style="margin-top: 20px">
         <h4 class="alert-heading"><?php echo _('No Device Things configured'); ?></h4>
@@ -179,9 +179,10 @@ function drawThing(thing) {
         if (typeof item.header !== 'undefined' && item.header) {
             header += drawItem("header", itemid, item, collapsed[thingid]);
         }
+        var label = typeof thing.items[i].label !== 'undefined' ? thing.items[i].label : "";
         list += "<div class='group-item'>" +
                 "<div class='group-grow'></div>" +
-                "<div class='item-name'><span>"+thing.items[i].label+"</span></div>" +
+                "<div class='item-name'><span>"+label+"</span></div>" +
                 drawItem("item", itemid, item, true) +
             "</div>";
 
@@ -258,8 +259,12 @@ function drawItemValue(item) {
                 "<span class='slider-text'>"+formatItemValue(item, value)+"</span>";
         }
         else {
+            var format = "";
+            if (typeof item.min !== 'undefined') format += "min='"+item.min+"' ";
+            if (typeof item.max !== 'undefined') format += "max='"+item.max+"' ";
+            if (typeof item.step !== 'undefined') format += "step='"+item.step+"' ";
             if (typeof item.write !== 'undefined' && item.write) {
-                return "<input class='item-value item-center input-small' type='"+type+"' value='"+formatItemValue(item, value)+"' />";
+                return "<input class='item-value item-center input-small' type='"+type+"' "+format+"value='"+formatItemValue(item, value)+"' />";
             }
             else {
                 return "<span>"+formatItemValue(item, value)+"</span>";
@@ -383,25 +388,39 @@ function registerEvents() {
         
         var type = $(this).data('type');
         if (type != "switch") {
-            var id = $(this).data('id');
-            var item = items[id];
-            var input = $(this).find('input');
-            
-            var value = parseItemValue(item, type, input.val());
-            if (type == "number") {
-                var scale = 1;
-                if (typeof item.scale !== 'undefined' && item.scale != 0) {
-                    scale = item.scale;
-                }
-                $('div[data-id="'+id+'"] input').val(formatItemValue(item, value));
-                
-                value = value/scale;
-            }
-            
             var self = $(this);
-            thing.setItemValue(item.thingid, item.id, value, function() {
-                self.trigger('focusout');
-            });
+            
+            if (timeout != null) {
+                clearTimeout(timeout);
+            }
+            timeout = setTimeout(function() {
+                timeout = null;
+                
+                var id = self.data('id');
+                var item = items[id];
+                var input = self.find('input');
+                
+                var value = parseItemValue(item, type, input.val());
+                if (type == "number") {
+                    var scale = 1;
+                    if (typeof item.scale !== 'undefined' && item.scale != 0) {
+                        scale = item.scale;
+                    }
+                    if (typeof item.min !== 'undefined' && item.min > value ||
+                        typeof item.max !== 'undefined' && item.max < value) {
+                        
+                        self.trigger('focusout');
+                        return;
+                    }
+                    $('div[data-id="'+id+'"] input').val(formatItemValue(item, value));
+                    
+                    value = value/scale;
+                }
+                thing.setItemValue(item.thingid, item.id, value, function() {
+                    self.trigger('focusout');
+                });
+                
+            }, 250);
         }
     });
 
