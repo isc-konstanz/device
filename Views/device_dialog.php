@@ -49,11 +49,11 @@
             </span>
             <div id="device-config-name-container" class="hide">
                 <label><b><?php echo _('Name'); ?></b></label>
-                <input id="device-config-name" class="input-large" type="text">
+                <input id="device-config-name" class="input-large" type="text" pattern="[a-zA-Z0-9-_.: ]+">
             </div>
             
             <label><b><?php echo _('Description'); ?></b></label>
-            <input id="device-config-description" class="input-large" type="text">
+            <input id="device-config-description" class="input-large" type="text" pattern="[a-zA-Z0-9-_.: ]+">
             
             <label><b><?php echo _('Device Key'); ?></b></label>
             <div class="input-append">
